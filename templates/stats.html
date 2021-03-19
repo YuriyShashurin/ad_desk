@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Stats for each AD</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">AD</th>
+            <th scope="col">N of tags</th>
+            <th scope="col">N of comments</th>
+        </tr>
+    </thead>
+  <tbody>
+  {% for ad in data_ads %}
+    <tr>
+      <td><a href="/list/{{ad._id}}">{{ad.title}}</a></td>
+      <td>{{ ad.tag | length }}</td>
+      <td>{{ ad.comments | length }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

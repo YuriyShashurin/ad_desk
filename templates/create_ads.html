@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-3">
+    <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Название объявления*</label>
+                <input type="text" class="form-control" name="title" id="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="cost" class="form-label">Стоимость (необязательно)</label>
+                <input type="text" class="form-control" name="cost" id="cost">
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">Город (необязательно)</label>
+                <input type="text" class="form-control" name="city" id="city">
+            </div>
+            <div class="d-flex">
+                <div class="mb-3 mr-3" style="min-width: 50%; height: 100%">
+                    <label for="text" class="form-label">Текст объявления* </label>
+                    <textarea type="text" class="form-control" rows="13" cols="20" name="text" id="text" placeholder="" required></textarea>
+                </div>
+                <div class="ms-3">
+                    <div class="mb-3">
+                        <label for="user" class="form-label">Как к вам можно обращаться</label>
+                        <input type="text" class="form-control" name="user" id="user" placeholder="" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Оставьте свой email</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Оставьте свой телефон</label>
+                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="photo" class="form-label">Добавьте изображение к объявлению (Допускаются форматы 'png', 'jpg', 'jpeg')</label>
+                        <input type="file" class="form-control" name="photo" id="photo" placeholder="" required>
+                    </div>
+                </div>
+            </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

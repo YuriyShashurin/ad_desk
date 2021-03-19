@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="d-flex flex-row flex-wrap">
+{% for ad in data_ads %}
+
+        <div class="card m-3" style="width: 30%;">
+            <img src="{{ url_for('static', filename=ad.photo) }}" class="card-img-top" style="width: 100%; height: 220px" alt="{{ ad.title }}">
+            <div class="card-body">
+                <h5 class="card-title mb-3"><a href="/list/{{ ad._id}}">{{ ad.title }}</a></h5>
+
+                <div class="d-flex mt-3">
+                    <img src="{{ url_for('static', filename='building.png') }}" class="me-3" style="width: 30px; height: 30px">
+                    {% if ad.city %}
+                    <p class="card-text cm-strong">{{ ad.city }}</p>
+                    {% else %}
+                    <p class="card-text cm-strong">Город не указан</p>
+                    {% endif %}
+                </div>
+                <p class="card-text"></p>
+                <div class="d-flex">
+                    <img src="{{ url_for('static', filename='coin.png') }}" class="me-3" style="width: 30px; height: 30px">
+                    {% if ad.cost %}
+                    <p class="card-text cm-strong">{{ ad.cost }} <strong>RUB</strong></p>
+                    {% else %}
+                    <p class="card-text cm-strong"> Стоимость не указана </p>
+                    {% endif %}
+                </div>
+                <div class="d-flex mt-3 justify-content-between">
+                    <p>Tags:
+                    {% if ad.tag|length > 0 %}
+                    {% for tag in ad.tag %}
+                        <a href="#">{{ tag }}, </a>
+                        {% endfor %}
+                        {% else %}
+                        Теги не найдены
+                        {% endif %}
+                    </p>
+                    <div class="d-flex">
+                        <img src="{{ url_for('static', filename='comment.png') }}" class="me-3" style="width: 30px; height: 30px">
+                        <p>{{ ad.comments | length }}</p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-primary mr-2" style="min-width: 40%"><a class="text-white" href="/delete/{{ ad._id}}" >DELETE</a></button>
+                    <button type="button" class="btn btn-primary" style="min-width: 40%"><a class="text-white" href="/stats/{{ ad._id}}">STATS</a></button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

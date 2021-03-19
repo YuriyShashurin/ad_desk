@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="d-flex flex-row justify-content-between">
+        <h1 class="mb-4 text-uppercase">{{ data.title }}</h1>
+        <small>Ad create <strong>{{ data.date }}</strong></small>
+    </div>
+
+    <div class="d-flex">
+        <h5 class="me-5">Tags:
+            {% if data.tag|length > 0 %}
+                {% for tag in data.tag %}
+                    <a href="#">{{ tag }}, </a>
+                {% endfor %}
+
+            {% else %}
+                tags not found
+            {% endif %}
+        </h5>
+        <form action="/list/add_tag/{{data._id}}" method="post" enctype="multipart/form-data" class="d-flex">
+            <label for="tag" class="me-4">Add new tag:</label>
+            <input type="text" class="form-control" name="tag" id="tag" style="max-width: 30%" required>
+            <button class="ms-3"><img src="{{ url_for('static', filename='plus.png') }}" style="width: 20px; height: 20px"></button>
+        </form>
+    </div>
+    <small class="mb-3">({{ data.tag | length }} tags in total)</small>
+
+    <div class="row g-0 bg-light position-relative">
+        <div class="col-md-6 mb-md-0 p-md-4">
+            <img src="{{ url_for('static', filename=data.photo) }}" class="w-100" alt="data.photo">
+        </div>
+        <div class="col-md-6 p-4 ps-md-0 d-flex flex-column">
+            {% if data.cost %}
+            <h2 class="mb-5">{{ data.cost }} RUB</h2>
+            {% else %}
+            <h2 class="mb-5">Стоимость не указана</h2>
+            {% endif %}
+
+            <p class="fs-4">{{ data.text}}</p>
+        </div>
+    </div>
+    <div class="row g-0 bg-light position-relative">
+        <h2 class="text-center text-uppercase">Contact me</h2>
+        <div class="m-4">
+            {% if data.city %}
+            <h4 class="mb-4">CITY: {{ data.city }}</h4>
+            {% else %}
+            <h4 class="mb-4">CITY: N/A</h4>
+            {% endif %}
+            <h4 class="mb-5">NAME: {{ data.user }}</h4>
+            <h4 class="mb-3">CONTACT WITH OWNER</h4>
+            <h4 class="mb-3 ms-5">PHONE - {{ data.phone }}</h4>
+            <h4 class="mb-3 ms-5"><a href="mailto:{{ data.email }}" class="stretched-link">EMAIL</a></h4>
+        </div>
+    </div>
+    <div class="mb-5">
+        <h2 class="text-center text-uppercase">Add your comment</h2>
+        <form action="/list/add_comment/{{data._id}}" method="post" enctype="multipart/form-data">
+            <div>
+                <label for="username" class="h3">Please enter your username</label>
+                <input type="text" class="form-control" name="username" id="username" style="max-width: 30%" required>
+            </div>
+            <div>
+                <label for="comment" class="h3">Please add your comment</label>
+                <input type="text" class="form-control" name="comment" id="comment" required>
+            </div>
+            <button class="btn btn-info mt-3">Add comment</button>
+        </form>
+
+    </div>
+    <div class="mb-5">
+        <h2>Comments (Now {{ data.comments | length }} added):</h2>
+        {% if data.comments|length > 0 %}
+        {% for comment in data.comments %}
+        <div class="card mb-5 bg-secondary text-white">
+                <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between mb-3 ">
+                        <h3>{{ comment.username}}</h3>
+                        <strong>{{ comment.date}}</strong>
+                    </div>
+                    <p class="fs-5"> {{comment.comment}}</p>
+                </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="card h6">No yet any comments</p>
+        {% endif %}
+    </div>
+
+
+
+
+{% endblock %}

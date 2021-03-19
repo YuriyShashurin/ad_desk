@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Stats for id {{data._id}}/<a href="/list/{{data._id}}">{{data.title}}</a></h2>
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">N of tags</th>
+            <th scope="col">N of comments</th>
+        </tr>
+    </thead>
+     <tbody>
+     <tr>
+         <td>{{ data.tag | length }}</td>
+         <td>{{ data.comments | length }}</td>
+     </tr>
+  </tbody>
+</table>
+
+{% endblock %}
