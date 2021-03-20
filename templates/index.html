@@ -2,6 +2,7 @@
 
 {% block content %}
     <div class="d-flex flex-row flex-wrap">
+{% if data_ads %}
 {% for ad in data_ads %}
 
         <div class="card m-3" style="width: 30%;">
@@ -48,6 +49,9 @@
             </div>
         </div>
         {% endfor %}
+        {% else %}
+        <h2>We have no any ads yet. Please <a href="/create">create new ad</a></h2>
+        {% endif %}
     </div>
 
 {% endblock %}

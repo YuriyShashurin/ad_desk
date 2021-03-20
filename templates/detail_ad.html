@@ -8,8 +8,8 @@
 
     <div class="d-flex">
         <h5 class="me-5">Tags:
-            {% if data.tag|length > 0 %}
-                {% for tag in data.tag %}
+            {% if data.tags|length > 0 %}
+                {% for tag in data.tags %}
                     <a href="#">{{ tag }}, </a>
                 {% endfor %}
 
@@ -23,7 +23,7 @@
             <button class="ms-3"><img src="{{ url_for('static', filename='plus.png') }}" style="width: 20px; height: 20px"></button>
         </form>
     </div>
-    <small class="mb-3">({{ data.tag | length }} tags in total)</small>
+    <small class="mb-3">({{ data.tags | length }} tags in total)</small>
 
     <div class="row g-0 bg-light position-relative">
         <div class="col-md-6 mb-md-0 p-md-4">
